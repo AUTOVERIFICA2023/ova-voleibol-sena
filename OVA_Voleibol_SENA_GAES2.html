@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OVA Voleibol | GAES 2 - SENA</title>
+<style>
+  :root{
+    --sena:#39A900;
+    --sena-dark:#267400;
+    --ink:#17212b;
+    --muted:#667085;
+    --bg:#f5f8f4;
+    --card:#ffffff;
+    --line:#dfe7dc;
+    --soft:#eef7e9;
+    --warn:#fff7e6;
+    --danger:#fff0f0;
+    --shadow:0 10px 28px rgba(22,50,15,.09);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,#f7fbf5 0,#f3f5f2 100%);
+  }
+  header{
+    background:linear-gradient(135deg,var(--sena-dark),var(--sena));
+    color:#fff;
+    padding:28px 18px 76px;
+  }
+  .hero{max-width:1180px;margin:auto;display:flex;gap:24px;align-items:center;justify-content:space-between}
+  .badge{
+    min-width:104px;height:104px;border:3px solid rgba(255,255,255,.75);border-radius:24px;
+    display:grid;place-items:center;font-weight:900;font-size:28px;letter-spacing:1px;background:rgba(255,255,255,.12)
+  }
+  .hero h1{font-size:clamp(28px,4vw,48px);margin:0 0 8px}
+  .hero p{margin:4px 0;color:#edffe6}
+  .container{max-width:1180px;margin:-52px auto 60px;padding:0 16px}
+  nav{
+    position:sticky;top:0;z-index:20;
+    background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:16px;padding:10px;box-shadow:var(--shadow);
+    display:flex;gap:8px;overflow:auto;margin-bottom:20px
+  }
+  nav button{
+    border:0;background:transparent;padding:10px 14px;border-radius:10px;cursor:pointer;
+    font-weight:700;color:#344054;white-space:nowrap
+  }
+  nav button.active,nav button:hover{background:var(--soft);color:var(--sena-dark)}
+  .section{display:none}
+  .section.active{display:block}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+  .card{
+    grid-column:span 12;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow)
+  }
+  .half{grid-column:span 6}
+  .third{grid-column:span 4}
+  @media(max-width:850px){.half,.third{grid-column:span 12}.hero{align-items:flex-start}.badge{min-width:78px;height:78px;font-size:22px}}
+  h2{margin:0 0 14px;font-size:24px}
+  h3{margin:0 0 10px}
+  .muted{color:var(--muted)}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .kpi{background:var(--soft);border-radius:14px;padding:16px}
+  .kpi strong{display:block;font-size:26px;color:var(--sena-dark)}
+  @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  label{display:block;font-weight:700;margin:10px 0 6px}
+  input,select,textarea{
+    width:100%;padding:11px 12px;border:1px solid #cbd5c7;border-radius:10px;background:#fff;font:inherit
+  }
+  textarea{min-height:95px;resize:vertical}
+  .row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:650px){.row{grid-template-columns:1fr}}
+  .btn{
+    border:0;border-radius:11px;padding:11px 15px;font-weight:800;cursor:pointer;margin:8px 6px 0 0
+  }
+  .primary{background:var(--sena);color:#fff}
+  .secondary{background:#eef2f0;color:#26332b}
+  .danger{background:#fbe9e9;color:#8b1d1d}
+  .btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{border-bottom:1px solid #e7ece5;padding:10px 8px;text-align:left;vertical-align:middle}
+  th{background:#f7faf6;color:#344054;position:sticky;top:0}
+  .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;max-height:520px}
+  .pill{display:inline-block;padding:4px 9px;border-radius:999px;background:var(--soft);color:var(--sena-dark);font-weight:800;font-size:12px}
+  .match{border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;background:#fff}
+  .match-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+  .score-grid{display:grid;grid-template-columns:1fr 72px 32px 72px 1fr;align-items:center;gap:8px;margin-top:10px}
+  .score-grid input{text-align:center;font-weight:800}
+  @media(max-width:640px){.score-grid{grid-template-columns:1fr 58px 22px 58px 1fr;font-size:13px}}
+  details{background:#fbfdfb;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+  summary{cursor:pointer;font-weight:800;color:#2b5f20}
+  .final-box{background:linear-gradient(135deg,#f1ffe9,#fff);border:1px solid #cfe8c5;border-radius:16px;padding:18px}
+  .winner{font-size:24px;font-weight:900;color:var(--sena-dark)}
+  .notice{padding:12px 14px;border-radius:12px;background:var(--warn);border:1px solid #f5d79a}
+  .ok{background:var(--soft);border:1px solid #cfe8c5}
+  .footer{text-align:center;color:#667085;padding:18px 0 30px}
+  .quiz-option{display:block;padding:10px;border:1px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer}
+  .quiz-option:hover{background:#f7faf6}
+  .progress{height:9px;background:#e9eee7;border-radius:99px;overflow:hidden;margin:10px 0 20px}
+  .progress>div{height:100%;background:var(--sena);width:0%}
+  @media print{
+    nav,.no-print,.btn{display:none!important}
+    header{padding:18px;background:#fff!important;color:#000!important}
+    .hero p{color:#333}.container{margin:0}.section{display:block!important}
+    .card{box-shadow:none;break-inside:avoid}.table-wrap{max-height:none;overflow:visible}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div>
+      <div class="pill" style="background:#fff;color:#267400;margin-bottom:10px">Objeto Virtual de Aprendizaje</div>
+      <h1>Campeonato de Voleibol</h1>
+      <p><strong>GAES 2 · Entrenamiento Deportivo · Ficha 3239918</strong></p>
+      <p>Didier Cardona · Natalia Pinzón · Maicol Leal · Equipo de trabajo</p>
+    </div>
+    <div class="badge">SENA</div>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="no-print">
+    <button class="active" data-tab="inicio">Inicio</button>
+    <button data-tab="reglamento">Reglamento</button>
+    <button data-tab="equipos">Equipos</button>
+    <button data-tab="fixture">Fixture</button>
+    <button data-tab="tabla">Puntuación</button>
+    <button data-tab="finales">Finales</button>
+    <button data-tab="aprende">Actividad OVA</button>
+  </nav>
+
+  <section id="inicio" class="section active">
+    <div class="grid">
+      <div class="card half">
+        <h2>🏐 Bienvenido al campeonato</h2>
+        <p>Este OVA permite organizar un torneo de voleibol, generar automáticamente el apareamiento de los equipos, registrar marcadores, calcular la tabla de posiciones y definir semifinalistas y finalistas.</p>
+        <div class="notice ok"><strong>Modo de uso:</strong> registra los equipos → genera el fixture → ingresa resultados → revisa la clasificación → genera las finales.</div>
+      </div>
+      <div class="card half">
+        <h2>🎯 Resultados de aprendizaje</h2>
+        <p>Al finalizar, el aprendiz podrá interpretar reglas básicas del voleibol, comprender un sistema de competición todos-contra-todos, aplicar la puntuación por resultado y reconocer la clasificación hacia las fases finales.</p>
+      </div>
+      <div class="card">
+        <div class="kpis">
+          <div class="kpi"><strong id="kTeams">0</strong><span>Equipos</span></div>
+          <div class="kpi"><strong id="kMatches">0</strong><span>Partidos</span></div>
+          <div class="kpi"><strong id="kPlayed">0</strong><span>Jugados</span></div>
+          <div class="kpi"><strong id="kPending">0</strong><span>Pendientes</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reglamento" class="section">
+    <div class="card">
+      <h2>📘 Reglamento básico</h2>
+      <p class="muted">Resumen didáctico. El docente/organizador puede adaptar duración, número de sets y criterios según el contexto del campeonato.</p>
+      <details open><summary>1. Objetivo del juego</summary><p>Enviar el balón por encima de la red para que toque el campo contrario y evitar que el rival logre lo mismo.</p></details>
+      <details><summary>2. Integrantes y rotación</summary><p>En voleibol de cancha juegan seis deportistas por equipo. Los jugadores rotan una posición en sentido horario cuando recuperan el derecho al saque.</p></details>
+      <details><summary>3. Contactos con el balón</summary><p>Cada equipo dispone de hasta tres contactos para devolver el balón, sin contar el bloqueo. Un mismo jugador no debe golpear dos veces consecutivas, salvo situaciones permitidas por el reglamento.</p></details>
+      <details><summary>4. Sets y victoria</summary><p>Formato sugerido: partido al mejor de cinco sets. Los cuatro primeros a 25 puntos y el quinto a 15, siempre con diferencia mínima de dos puntos. Para un torneo corto puede usarse el mejor de tres sets.</p></details>
+      <details><summary>5. Sistema de puntos para la tabla</summary><p>Este OVA usa por defecto: victoria 3–0 o 3–1 = 3 puntos; victoria 3–2 = 2 puntos; derrota 2–3 = 1 punto; derrota 0–3 o 1–3 = 0 puntos.</p></details>
+      <details><summary>6. Desempates</summary><p>Orden sugerido: puntos de clasificación, partidos ganados, diferencia de sets, sets a favor y enfrentamiento directo.</p></details>
+      <details><summary>7. Conducta y juego limpio</summary><p>Respeto por rivales, jueces y compañeros. Las decisiones arbitrales se acatan y cualquier reclamación se presenta de forma respetuosa por el capitán.</p></details>
+    </div>
+  </section>
+
+  <section id="equipos" class="section">
+    <div class="grid">
+      <div class="card third">
+        <h2>➕ Registrar equipo</h2>
+        <label>Nombre del equipo</label>
+        <input id="teamName" placeholder="Ej. Titanes">
+        <label>Capitán / responsable</label>
+        <input id="teamCaptain" placeholder="Nombre opcional">
+        <button class="btn primary" onclick="addTeam()">Agregar equipo</button>
+        <button class="btn secondary" onclick="loadExample()">Cargar ejemplo</button>
+      </div>
+      <div class="card" style="grid-column:span 8">
+        <h2>👥 Equipos inscritos</h2>
+        <div id="teamList" class="muted">Aún no hay equipos registrados.</div>
+        <button class="btn danger no-print" onclick="clearTournament()">Reiniciar campeonato</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="fixture" class="section">
+    <div class="card">
+      <h2>🗓️ Fixture / Apareamiento</h2>
+      <p class="muted">Generación automática por sistema todos contra todos. Si el número de equipos es impar, uno descansa por jornada.</p>
+      <div class="row">
+        <div>
+          <label>Formato de partido</label>
+          <select id="matchFormat">
+            <option value="5">Mejor de 5 sets</option>
+            <option value="3">Mejor de 3 sets</option>
+          </select>
+        </div>
+        <div>
+          <label>Fase clasificatoria</label>
+          <select id="roundMode">
+            <option value="single">Una vuelta</option>
+            <option value="double">Ida y vuelta</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn primary" onclick="generateFixture()">Generar fixture</button>
+      <button class="btn secondary" onclick="window.print()">Imprimir / Guardar PDF</button>
+      <div id="fixtureList" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <section id="tabla" class="section">
+    <div class="card">
+      <h2>📊 Tabla de posiciones</h2>
+      <p class="muted">Se actualiza automáticamente cada vez que registras un resultado.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>PG</th><th>PP</th><th>SF</th><th>SC</th><th>DS</th><th>PTS</th></tr></thead>
+          <tbody id="standingsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="finales" class="section">
+    <div class="grid">
+      <div class="card">
+        <h2>🏆 Fase final</h2>
+        <p>Los cuatro primeros de la tabla clasifican a semifinales:</p>
+        <p><strong>Semifinal 1:</strong> 1.º vs 4.º &nbsp; | &nbsp; <strong>Semifinal 2:</strong> 2.º vs 3.º</p>
+        <button class="btn primary" onclick="buildFinals()">Generar semifinales</button>
+        <div id="finalsArea"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aprende" class="section">
+    <div class="grid">
+      <div class="card half">
+        <h2>🧠 Actividad de aprendizaje</h2>
+        <p>Responde estas preguntas rápidas para comprobar lo aprendido.</p>
+        <div class="progress"><div id="quizProgress"></div></div>
+        <div id="quizBox"></div>
+      </div>
+      <div class="card half">
+        <h2>💡 Reto de aplicación</h2>
+        <p>Organiza un torneo real con mínimo 4 equipos. Genera el fixture, registra al menos tres resultados y explica por qué los cuatro primeros ocupan esas posiciones.</p>
+        <label>Reflexión del aprendiz</label>
+        <textarea id="reflection" placeholder="Escribe aquí tu conclusión..."></textarea>
+        <button class="btn primary" onclick="saveReflection()">Guardar reflexión</button>
+        <div id="reflectionMsg" class="muted"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">OVA Campeonato de Voleibol · GAES 2 · SENA · Funciona sin conexión y guarda el avance en este navegador.</div>
+</div>
+
+<script>
+const KEY='ova_voley_sena_v1';
+let state={teams:[],matches:[],format:5,roundMode:'single',finals:null,reflection:''};
+
+function save(){localStorage.setItem(KEY,JSON.stringify(state));updateAll()}
+function restore(){
+  try{const s=JSON.parse(localStorage.getItem(KEY));if(s) state={...state,...s}}catch(e){}
+  document.getElementById('reflection').value=state.reflection||'';
+  renderTeams();renderFixture();updateAll();
+}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function addTeam(){
+  const name=document.getElementById('teamName').value.trim();
+  const captain=document.getElementById('teamCaptain').value.trim();
+  if(!name)return alert('Escribe el nombre del equipo.');
+  if(state.teams.some(t=>t.name.toLowerCase()===name.toLowerCase()))return alert('Ese equipo ya existe.');
+  state.teams.push({id:crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random(),name,captain});
+  state.matches=[];state.finals=null;
+  document.getElementById('teamName').value='';document.getElementById('teamCaptain').value='';
+  save();renderTeams();renderFixture();
+}
+function removeTeam(id){
+  if(!confirm('¿Eliminar este equipo? El fixture actual se reiniciará.'))return;
+  state.teams=state.teams.filter(t=>t.id!==id);state.matches=[];state.finals=null;save();renderTeams();renderFixture();
+}
+function renderTeams(){
+  const box=document.getElementById('teamList');
+  if(!state.teams.length){box.innerHTML='<span class="muted">Aún no hay equipos registrados.</span>';return}
+  box.innerHTML=state.teams.map((t,i)=>`
+    <div class="match"><div class="match-head"><div><strong>${i+1}. ${esc(t.name)}</strong><br><span class="muted">${t.captain?('Capitán: '+esc(t.captain)):'Sin capitán registrado'}</span></div>
+    <button class="btn danger no-print" onclick="removeTeam('${t.id}')">Eliminar</button></div></div>`).join('');
+}
+function loadExample(){
+  if(state.teams.length && !confirm('Esto reemplazará los equipos actuales. ¿Continuar?'))return;
+  state.teams=['Titanes','Halcones','Guerreros','Águilas','Leones','Panteras'].map((name,i)=>({id:'e'+i,name,captain:''}));
+  state.matches=[];state.finals=null;save();renderTeams();renderFixture();
+}
+function clearTournament(){
+  if(!confirm('¿Seguro? Se borrarán equipos, resultados y finales guardados en este navegador.'))return;
+  state={teams:[],matches:[],format:5,roundMode:'single',finals:null,reflection:''};localStorage.removeItem(KEY);restore();
+}
+
+function generateFixture(){
+  if(state.teams.length<2)return alert('Registra por lo menos 2 equipos.');
+  state.format=parseInt(document.getElementById('matchFormat').value);
+  state.roundMode=document.getElementById('roundMode').value;
+  let arr=state.teams.map(t=>t.id);
+  if(arr.length%2)arr.push(null);
+  const n=arr.length, rounds=[];
+  let rot=[...arr];
+  for(let r=0;r<n-1;r++){
+    let pairs=[];
+    for(let i=0;i<n/2;i++){
+      const a=rot[i],b=rot[n-1-i];
+      if(a && b)pairs.push(r%2===0?[a,b]:[b,a]);
+    }
+    rounds.push(pairs);
+    rot=[rot[0],rot[n-1],...rot.slice(1,n-1)];
+  }
+  if(state.roundMode==='double'){
+    const second=rounds.map(pairs=>pairs.map(([a,b])=>[b,a]));
+    rounds=rounds.concat(second);
+  }
+  state.matches=[];
+  rounds.forEach((pairs,ri)=>pairs.forEach((p,pi)=>state.matches.push({
+    id:'m_'+ri+'_'+pi+'_'+Date.now(),round:ri+1,a:p[0],b:p[1],sa:'',sb:''
+  })));
+  state.finals=null;save();renderFixture();
+}
+function teamName(id){return state.teams.find(t=>t.id===id)?.name||'Equipo'}
+function renderFixture(){
+  const box=document.getElementById('fixtureList');
+  if(!state.matches.length){box.innerHTML='<div class="notice">Aún no hay fixture. Registra equipos y pulsa <strong>Generar fixture</strong>.</div>';return}
+  const rounds=[...new Set(state.matches.map(m=>m.round))];
+  box.innerHTML=rounds.map(r=>`<h3 style="margin-top:22px">Jornada ${r}</h3>`+
+    state.matches.filter(m=>m.round===r).map(m=>`
+      <div class="match">
+        <div class="match-head"><span class="pill">Partido</span><span class="muted">Jornada ${r}</span></div>
+        <div class="score-grid">
+          <strong style="text-align:right">${esc(teamName(m.a))}</strong>
+          <input type="number" min="0" max="${state.format===5?3:2}" value="${m.sa}" placeholder="0" onchange="setScore('${m.id}','sa',this.value)">
+          <strong style="text-align:center">–</strong>
+          <input type="number" min="0" max="${state.format===5?3:2}" value="${m.sb}" placeholder="0" onchange="setScore('${m.id}','sb',this.value)">
+          <strong>${esc(teamName(m.b))}</strong>
+        </div>
+      </div>`).join('')
+  ).join('');
+}
+function setScore(id,field,val){
+  const m=state.matches.find(x=>x.id===id);if(!m)return;
+  m[field]=val===''?'':Math.max(0,parseInt(val)||0);
+  const winSets=state.format===5?3:2;
+  if(m.sa!=='' && m.sb!=='' && m.sa===m.sb) alert('Un partido de voleibol no puede terminar empatado.');
+  if(m.sa>winSets || m.sb>winSets) alert('El número de sets ganados supera el formato del partido.');
+  save();
+}
+function standings(){
+  const s={};
+  state.teams.forEach(t=>s[t.id]={id:t.id,name:t.name,pj:0,pg:0,pp:0,sf:0,sc:0,pts:0});
+  state.matches.forEach(m=>{
+    if(m.sa===''||m.sb===''||m.sa===m.sb)return;
+    const a=s[m.a],b=s[m.b];if(!a||!b)return;
+    let sa=+m.sa,sb=+m.sb;a.pj++;b.pj++;a.sf+=sa;a.sc+=sb;b.sf+=sb;b.sc+=sa;
+    let winner=sa>sb?a:b,loser=sa>sb?b:a,ws=Math.max(sa,sb),ls=Math.min(sa,sb);
+    winner.pg++;loser.pp++;
+    if(state.format===5){
+      if(ws===3 && ls===2){winner.pts+=2;loser.pts+=1}else{winner.pts+=3}
+    }else{
+      if(ws===2 && ls===1){winner.pts+=2;loser.pts+=1}else{winner.pts+=3}
+    }
+  });
+  return Object.values(s).sort((x,y)=>
+    y.pts-x.pts || y.pg-x.pg || ((y.sf-y.sc)-(x.sf-x.sc)) || y.sf-x.sf || x.name.localeCompare(y.name)
+  );
+}
+function renderStandings(){
+  const body=document.getElementById('standingsBody'), rows=standings();
+  body.innerHTML=rows.map((r,i)=>`<tr>
+    <td><strong>${i+1}</strong></td><td>${esc(r.name)}</td><td>${r.pj}</td><td>${r.pg}</td><td>${r.pp}</td>
+    <td>${r.sf}</td><td>${r.sc}</td><td>${r.sf-r.sc}</td><td><strong>${r.pts}</strong></td>
+  </tr>`).join('');
+}
+function buildFinals(){
+  const rows=standings().filter(r=>r.pj>0);
+  if(rows.length<4)return alert('Se necesitan al menos 4 equipos con partidos registrados para generar semifinales.');
+  state.finals={s1:{a:rows[0].id,b:rows[3].id,sa:'',sb:''},s2:{a:rows[1].id,b:rows[2].id,sa:'',sb:''},final:{a:null,b:null,sa:'',sb:''}};
+  save();renderFinals();
+}
+function setFinalScore(stage,field,val){
+  state.finals[stage][field]=val===''?'':Math.max(0,parseInt(val)||0);
+  if(stage==='s1'||stage==='s2'){
+    const x=state.finals[stage];
+    if(x.sa!==''&&x.sb!==''&&x.sa!==x.sb){
+      const winner=+x.sa>+x.sb?x.a:x.b;
+      state.finals.final[stage==='s1'?'a':'b']=winner;
+    }
+  }
+  save();renderFinals();
+}
+function finalMatchHTML(stage,title,m){
+  if(!m)return '';
+  const A=m.a?teamName(m.a):'Por definir',B=m.b?teamName(m.b):'Por definir';
+  return `<div class="final-box" style="margin-top:14px"><strong>${title}</strong>
+    <div class="score-grid"><strong style="text-align:right">${esc(A)}</strong>
+    <input type="number" min="0" max="3" value="${m.sa}" onchange="setFinalScore('${stage}','sa',this.value)" ${!m.a||!m.b?'disabled':''}>
+    <strong style="text-align:center">–</strong>
+    <input type="number" min="0" max="3" value="${m.sb}" onchange="setFinalScore('${stage}','sb',this.value)" ${!m.a||!m.b?'disabled':''}>
+    <strong>${esc(B)}</strong></div></div>`;
+}
+function renderFinals(){
+  const area=document.getElementById('finalsArea');
+  if(!state.finals){area.innerHTML='';return}
+  const f=state.finals.final;
+  let champ='';
+  if(f.a&&f.b&&f.sa!==''&&f.sb!==''&&f.sa!==f.sb){
+    champ=teamName(+f.sa>+f.sb?f.a:f.b);
+  }
+  area.innerHTML=finalMatchHTML('s1','Semifinal 1 · 1.º vs 4.º',state.finals.s1)+
+                 finalMatchHTML('s2','Semifinal 2 · 2.º vs 3.º',state.finals.s2)+
+                 finalMatchHTML('final','🥇 Gran Final',state.finals.final)+
+                 (champ?`<div class="final-box" style="text-align:center;margin-top:18px"><div>CAMPEÓN</div><div class="winner">🏆 ${esc(champ)}</div></div>`:'');
+}
+function updateAll(){
+  renderStandings();renderFinals();
+  const played=state.matches.filter(m=>m.sa!==''&&m.sb!==''&&m.sa!==m.sb).length;
+  document.getElementById('kTeams').textContent=state.teams.length;
+  document.getElementById('kMatches').textContent=state.matches.length;
+  document.getElementById('kPlayed').textContent=played;
+  document.getElementById('kPending').textContent=Math.max(0,state.matches.length-played);
+}
+
+const quiz=[
+ {q:'¿Cuántos contactos tiene normalmente un equipo para devolver el balón?',o:['2','3','4'],a:1},
+ {q:'En el sistema usado por este OVA, ¿cuántos puntos recibe una victoria 3–0?',o:['1','2','3'],a:2},
+ {q:'¿Qué equipos se enfrentan en la semifinal 1?',o:['1.º vs 4.º','1.º vs 2.º','2.º vs 4.º'],a:0},
+ {q:'Si el torneo tiene un número impar de equipos, ¿qué ocurre?',o:['Se elimina uno','Un equipo descansa por jornada','Se juega con empate'],a:1}
+];
+let qi=0,qscore=0;
+function renderQuiz(){
+  const b=document.getElementById('quizBox');
+  if(qi>=quiz.length){
+    b.innerHTML=`<div class="final-box"><strong>Resultado:</strong><div class="winner">${qscore}/${quiz.length}</div><p>${qscore>=3?'¡Muy bien! Dominaste los conceptos principales.':'Repasa el reglamento y vuelve a intentarlo.'}</p><button class="btn primary" onclick="restartQuiz()">Repetir actividad</button></div>`;
+    document.getElementById('quizProgress').style.width='100%';return
+  }
+  const x=quiz[qi];
+  b.innerHTML=`<h3>${qi+1}. ${x.q}</h3>`+x.o.map((v,i)=>`<div class="quiz-option" onclick="answerQuiz(${i})">${v}</div>`).join('');
+  document.getElementById('quizProgress').style.width=(qi/quiz.length*100)+'%';
+}
+function answerQuiz(i){if(i===quiz[qi].a)qscore++;qi++;renderQuiz()}
+function restartQuiz(){qi=0;qscore=0;renderQuiz()}
+function saveReflection(){
+  state.reflection=document.getElementById('reflection').value;save();
+  document.getElementById('reflectionMsg').textContent='Reflexión guardada en este navegador.';
+}
+
+restore();renderQuiz();
+</script>
+</body>
+</html>
