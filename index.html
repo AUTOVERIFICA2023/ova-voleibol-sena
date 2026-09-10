@@ -67,6 +67,33 @@ details{background:#fbfdfb;border:1px solid var(--line);border-radius:12px;paddi
 .bar-item{min-width:64px;text-align:center}.bar{background:#9cc7d8;border-radius:8px 8px 0 0;min-height:4px}.bar-label{font-size:12px;margin-top:6px}.bar-val{font-size:12px;font-weight:800;margin-bottom:4px}
 .footer{text-align:center;color:var(--muted);padding:22px}
 @media print{nav,.btn,.no-print{display:none!important}.section{display:block!important}.card{box-shadow:none;break-inside:avoid}.wrap{margin:0}header{padding:16px;background:white!important;color:#111!important}.hero p{color:#333}}
+
+.integrantes{line-height:1.55}
+.hero-visual{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;margin-top:18px;padding:18px;border-radius:18px;background:linear-gradient(135deg,#ffffff18,#ffffff08);border:1px solid #ffffff33}
+.volleyball-art{width:100%;max-width:360px;margin:auto;display:block}
+.feature-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.feature{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.feature .ico{font-size:30px;display:block;margin-bottom:6px}
+.technique-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.technique{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fbfdfb;cursor:pointer;transition:.2s}
+.technique:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.technique.active{outline:3px solid #39A90033;background:#f4fff0}
+.technique-visual{height:130px;display:grid;place-items:center}
+.technique-visual svg{max-width:100%;height:115px}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.timeline .step{padding:14px;border:1px solid var(--line);border-radius:12px;background:white;text-align:center}
+.rally-area{position:relative;height:300px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(#e9f6ff 0 58%,#e7c88b 58%)}
+.rally-net{position:absolute;left:50%;top:52px;bottom:0;width:4px;background:#f8f8f8;box-shadow:0 0 0 1px #8a8a8a}
+.rally-ball{position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff 0 18%,#f7c44a 19% 45%,#3f7dd8 46% 58%,#fff 59% 100%);left:12%;top:56px;transition:left .55s ease,top .55s ease;box-shadow:0 5px 12px #0002}
+.rally-player{position:absolute;bottom:28px;font-size:50px}
+.rally-player.a{left:16%}.rally-player.b{right:16%}
+.rotation-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:430px;margin:auto}
+.rotation-player{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:white;border:3px solid #306d9b;font-weight:900;font-size:22px;transition:.35s}
+.rotation-player.front{border-color:#b56a00;background:#fff4dd}
+.rotation-player.highlight{transform:scale(1.08);box-shadow:0 0 0 6px #39A90020}
+@media(max-width:800px){.hero-visual,.technique-grid{grid-template-columns:1fr}.feature-strip{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.timeline{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 <body>
@@ -76,7 +103,8 @@ details{background:#fbfdfb;border:1px solid var(--line);border-radius:12px;paddi
       <span class="pill" style="background:white;color:#267400">Objeto Virtual de Aprendizaje</span>
       <h1>Campeonato de Voleibol</h1>
       <p><strong>GAES 2 · Entrenamiento Deportivo · Ficha 3239918</strong></p>
-      <p>Didier Cardona · Natalia Pinzón · Maicol Leal · Equipo de trabajo</p>
+      <p class="integrantes"><strong>Integrantes:</strong><br>
+Joan Sebastian Jaimes · Dolly Contreras · Laren Liseth Rodriguez · Natalia Pinion · Didier Cardona</p>
     </div>
     <div class="logo">SENA</div>
   </div>
@@ -87,6 +115,8 @@ details{background:#fbfdfb;border:1px solid var(--line);border-radius:12px;paddi
   <button class="active" data-tab="inicio">Inicio</button>
   <button data-tab="reglas">Reglamento</button>
   <button data-tab="cancha">Cancha</button>
+  <button data-tab="tecnicas">Técnicas</button>
+  <button data-tab="rally">Rally</button>
   <button data-tab="marcador">Marcador</button>
   <button data-tab="equipos">Equipos</button>
   <button data-tab="fixture">Fixture</button>
@@ -99,8 +129,29 @@ details{background:#fbfdfb;border:1px solid var(--line);border-radius:12px;paddi
   <div class="grid">
     <div class="card two-thirds">
       <h2>🏐 ¿Qué vas a aprender?</h2>
-      <p>Este OVA combina aprendizaje y organización de un campeonato. Permite estudiar las reglas básicas, reconocer posiciones en la cancha, simular el marcador, crear el apareamiento de equipos, registrar resultados y obtener la clasificación y las finales.</p>
-      <div class="notice"><strong>Ruta sugerida:</strong> Reglamento → Cancha → Marcador → Equipos → Fixture → Resultados → Finales → Actividad.</div>
+      <p>Este OVA combina aprendizaje y organización de un campeonato. Permite estudiar reglas, reconocer posiciones, practicar conceptos técnicos, simular jugadas, organizar equipos, crear el fixture y obtener la clasificación y las finales.</p>
+      <div class="hero-visual">
+        <div>
+          <h3>Aprende haciendo</h3>
+          <p class="muted">Explora la cancha, identifica posiciones, simula una rotación, observa técnicas básicas y juega un rally visual antes de organizar el campeonato.</p>
+          <div class="notice"><strong>Ruta sugerida:</strong> Reglamento → Cancha → Técnicas → Rally → Marcador → Equipos → Fixture → Finales → Actividad.</div>
+        </div>
+        <svg class="volleyball-art" viewBox="0 0 420 250" aria-label="Ilustración de voleibol">
+          <rect width="420" height="250" rx="20" fill="#dff2ff"/>
+          <rect y="160" width="420" height="90" fill="#e5c180"/>
+          <line x1="210" y1="42" x2="210" y2="220" stroke="#777" stroke-width="4"/>
+          <rect x="178" y="55" width="64" height="86" fill="#ffffffcc" stroke="#999"/>
+          <circle cx="112" cy="130" r="16" fill="#ffd1a8"/><rect x="96" y="147" width="32" height="50" rx="8" fill="#39A900"/>
+          <circle cx="305" cy="132" r="16" fill="#ffd1a8"/><rect x="289" y="149" width="32" height="48" rx="8" fill="#3567c9"/>
+          <circle cx="214" cy="42" r="18" fill="#fff" stroke="#c28b00" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="feature-strip">
+        <div class="feature"><span class="ico">🧭</span><strong>Posiciones</strong></div>
+        <div class="feature"><span class="ico">🤾</span><strong>Técnicas</strong></div>
+        <div class="feature"><span class="ico">⚡</span><strong>Rally</strong></div>
+        <div class="feature"><span class="ico">🏆</span><strong>Competencia</strong></div>
+      </div>
     </div>
     <div class="card third">
       <h2>🎯 Propósito</h2>
@@ -167,6 +218,60 @@ details{background:#fbfdfb;border:1px solid var(--line);border-radius:12px;paddi
       <p>Cuando el equipo receptor gana el derecho al saque, rota una posición en sentido horario.</p>
       <button class="btn primary" id="rotateBtn">Simular rotación</button>
       <div id="rotationText" class="tooltip">1 → 6 → 5 → 4 → 3 → 2 → 1</div>
+    </div>
+  </div>
+</section>
+
+
+<section id="tecnicas" class="section">
+  <div class="grid">
+    <div class="card">
+      <h2>🤾 Técnicas básicas del voleibol</h2>
+      <p class="muted">Selecciona una técnica para ver su explicación.</p>
+      <div class="technique-grid">
+        <div class="technique active" data-tech="saque"><div class="technique-visual">🏐</div><strong>Saque</strong><div class="small muted">Inicio de la jugada.</div></div>
+        <div class="technique" data-tech="recepcion"><div class="technique-visual">🙌</div><strong>Recepción</strong><div class="small muted">Control del balón rival.</div></div>
+        <div class="technique" data-tech="remate"><div class="technique-visual">💥</div><strong>Remate</strong><div class="small muted">Ataque cerca de la red.</div></div>
+      </div>
+      <div id="techInfo" class="tooltip"><strong>Saque:</strong> golpe que inicia la jugada. Busca precisión, control y dirección.</div>
+      <div class="timeline" style="margin-top:14px">
+        <div class="step"><strong>1</strong><br>Preparación</div>
+        <div class="step"><strong>2</strong><br>Lectura</div>
+        <div class="step"><strong>3</strong><br>Contacto</div>
+        <div class="step"><strong>4</strong><br>Recuperación</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rally" class="section">
+  <div class="grid">
+    <div class="card two-thirds">
+      <h2>⚡ Simulador visual de rally</h2>
+      <p class="muted">Pulsa los botones para mover el balón y entender una jugada básica.</p>
+      <div class="rally-area">
+        <div class="rally-net"></div>
+        <div class="rally-player a">🧍‍♂️</div>
+        <div class="rally-player b">🧍‍♀️</div>
+        <div id="rallyBall" class="rally-ball"></div>
+      </div>
+      <div class="score-controls">
+        <button class="btn primary" id="serveBtn">1. Saque</button>
+        <button class="btn secondary" id="receiveBtn">2. Recepción</button>
+        <button class="btn secondary" id="setBtn">3. Colocación</button>
+        <button class="btn secondary" id="spikeBtn">4. Remate</button>
+        <button class="btn danger" id="rallyReset">Reiniciar</button>
+      </div>
+      <div id="rallyText" class="tooltip"><strong>Listo:</strong> comienza con el saque.</div>
+    </div>
+    <div class="card third">
+      <h2>🔄 Rotación visual</h2>
+      <div id="rotationBoard" class="rotation-board">
+        <div class="rotation-player front">4</div><div class="rotation-player front">3</div><div class="rotation-player front">2</div>
+        <div class="rotation-player">5</div><div class="rotation-player">6</div><div class="rotation-player">1</div>
+      </div>
+      <button class="btn primary" id="visualRotate">Rotar jugadores</button>
+      <div id="visualRotateText" class="tooltip">Posición inicial.</div>
     </div>
   </div>
 </section>
@@ -401,6 +506,44 @@ function renderQuiz(){
   b.querySelectorAll('[data-opt]').forEach(btn=>btn.onclick=()=>{const ok=+btn.dataset.opt===x.a;if(ok)qs++;btn.classList.add(ok?'correct':'wrong');document.getElementById('quizFeedback').textContent=x.e;b.querySelectorAll('[data-opt]').forEach(y=>y.disabled=true);setTimeout(()=>{qi++;renderQuiz()},900)})
 }
 document.getElementById('saveReflection').onclick=()=>{state.reflection=document.getElementById('reflection').value;save();document.getElementById('reflectionMsg').textContent='Reflexión guardada en este navegador.'};
+
+
+const techText={
+  saque:'<strong>Saque:</strong> golpe que inicia la jugada. Busca precisión, control y dirección.',
+  recepcion:'<strong>Recepción:</strong> se usa para controlar el saque o ataque rival y dirigir el balón al colocador.',
+  remate:'<strong>Remate:</strong> acción ofensiva de salto y golpeo para enviar el balón con potencia al campo contrario.'
+};
+document.querySelectorAll('.technique').forEach(card=>card.addEventListener('click',()=>{
+  document.querySelectorAll('.technique').forEach(x=>x.classList.remove('active'));
+  card.classList.add('active');
+  document.getElementById('techInfo').innerHTML=techText[card.dataset.tech];
+}));
+
+const rallyBall=document.getElementById('rallyBall');
+const rallyText=document.getElementById('rallyText');
+function setRally(step){
+  const states={
+    0:['12%','56px','<strong>Listo:</strong> comienza con el saque.'],
+    1:['40%','36px','<strong>Saque:</strong> el balón cruza la red.'],
+    2:['74%','155px','<strong>Recepción:</strong> el rival controla el balón.'],
+    3:['66%','62px','<strong>Colocación:</strong> el balón se eleva para preparar el ataque.'],
+    4:['35%','122px','<strong>Remate:</strong> ataque hacia el campo contrario.']
+  };
+  const s=states[step]; rallyBall.style.left=s[0]; rallyBall.style.top=s[1]; rallyText.innerHTML=s[2];
+}
+document.getElementById('serveBtn').onclick=()=>setRally(1);
+document.getElementById('receiveBtn').onclick=()=>setRally(2);
+document.getElementById('setBtn').onclick=()=>setRally(3);
+document.getElementById('spikeBtn').onclick=()=>setRally(4);
+document.getElementById('rallyReset').onclick=()=>setRally(0);
+
+let visualRot=0;
+document.getElementById('visualRotate').onclick=()=>{
+  visualRot=(visualRot+1)%6;
+  const base=[4,3,2,5,6,1], rotated=base.slice(-visualRot).concat(base.slice(0,-visualRot));
+  document.querySelectorAll('#rotationBoard .rotation-player').forEach((el,i)=>{el.textContent=rotated[i];el.classList.add('highlight');setTimeout(()=>el.classList.remove('highlight'),350)});
+  document.getElementById('visualRotateText').textContent='Rotación '+(visualRot+1)+': cambio en sentido horario.';
+};
 
 restore();renderQuiz();renderSim();
 </script>
