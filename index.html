@@ -104,7 +104,7 @@ details{background:#fbfdfb;border:1px solid var(--line);border-radius:12px;paddi
       <h1>Campeonato de Voleibol</h1>
       <p><strong>GAES 2 · Entrenamiento Deportivo · Ficha 3239918</strong></p>
       <p class="integrantes"><strong>Integrantes:</strong><br>
-Joan Sebastian Jaimes · Dolly Contreras · Laren Liseth Rodriguez · Natalia Pinion · Didier Cardona</p>
+Joan Sebastian Jaimes · Dolly Contreras · Karen Lizeth Rodriguez · Natalia Pinzón · Didier Cardona</p>
     </div>
     <div class="logo">SENA</div>
   </div>
@@ -173,20 +173,25 @@ Joan Sebastian Jaimes · Dolly Contreras · Laren Liseth Rodriguez · Natalia Pi
     <div class="card half">
       <h2>📘 Reglamento esencial</h2>
       <details open><summary>Objetivo del juego</summary><p>Pasar el balón por encima de la red buscando que toque el campo rival, evitando que el contrario haga lo mismo.</p></details>
+      <details><summary>Rally Point: cada jugada vale 1 punto</summary><p>El voleibol utiliza sistema <strong>Rally Point</strong>: cada jugada terminada otorga 1 punto, sin importar cuál equipo realizó el saque.</p></details>
       <details><summary>Jugadores</summary><p>Seis jugadores en cancha por equipo. La rotación se realiza cuando el equipo recupera el derecho al saque.</p></details>
-      <details><summary>Máximo de contactos</summary><p>Hasta tres contactos para devolver el balón, sin contar el bloqueo en las situaciones reglamentarias.</p></details>
-      <details><summary>Sets</summary><p>Formato oficial habitual: mejor de cinco sets. Los cuatro primeros a 25 puntos y el quinto a 15, siempre con diferencia mínima de dos.</p></details>
-      <details><summary>Puntuación de clasificación</summary><p>3–0 o 3–1: ganador 3 pts. 3–2: ganador 2 pts y perdedor 1 pt. Derrota 0–3 o 1–3: 0 pts.</p></details>
+      <details><summary>Máximo de contactos</summary><p>El equipo dispone de hasta <strong>3 toques</strong> para devolver el balón. El bloqueo no se cuenta como uno de esos tres contactos en las situaciones reglamentarias.</p></details>
+      <details><summary>Cómo se gana un set</summary><p><strong>Sets 1 al 4:</strong> se juega a 25 puntos. <strong>5.º set:</strong> si el partido llega 2–2, se juega a 15 puntos. En todos los casos se debe ganar por <strong>2 puntos de ventaja</strong>. Ejemplos: 25–23 sí termina; 24–24 continúa hasta 26–24, 27–25, 30–28, etc. En el quinto set, 15–13 termina; 14–14 continúa hasta lograr dos puntos de diferencia.</p></details>
+      <details><summary>Cómo se gana un partido</summary><p><strong>Colegio / escolar / rápido:</strong> al mejor de 3 sets, gana quien consiga 2 sets. <strong>Oficial / élite / liga:</strong> al mejor de 5 sets, gana quien consiga 3 sets.</p></details>
+      <details><summary>Puntos para la tabla de posiciones</summary><p><strong>Victoria 2–0, 3–0 o 3–1:</strong> ganador 3 puntos y rival 0. <strong>Victoria 2–1 o 3–2:</strong> ganador 2 puntos y rival 1.</p></details>
+      <details><summary>Desempates en la tabla</summary><p>Si dos o más equipos terminan igualados, se revisan en este orden: <strong>1.</strong> partidos ganados; <strong>2.</strong> sets ganados / sets perdidos; <strong>3.</strong> puntos a favor / puntos en contra.</p></details>
     </div>
     <div class="card half">
-      <h2>⚠️ Faltas comunes</h2>
-      <p>• Cuatro contactos del equipo.</p>
-      <p>• Doble golpe no permitido.</p>
-      <p>• Tocar la red durante la acción de juego.</p>
-      <p>• Invasión que interfiera con el rival.</p>
-      <p>• Error de rotación.</p>
-      <p>• Balón fuera de los límites.</p>
-      <div class="notice">El reglamento completo puede adaptarse a las condiciones del campeonato formativo.</div>
+      <h2>⚡ ¿Cuándo gana un punto un equipo?</h2>
+      <p>Con sistema <strong>Rally Point</strong>, cada jugada vale 1 punto. Tu equipo obtiene el punto cuando:</p>
+      <p>1. El balón toca el piso de la cancha rival.</p>
+      <p>2. El rival saca afuera, a la red o pisa la línea.</p>
+      <p>3. El rival realiza 4 toques del balón; se permiten 3 toques más el bloqueo.</p>
+      <p>4. El rival toca la red.</p>
+      <p>5. El rival invade tu cancha con el pie completo.</p>
+      <p>6. Se produce doble toque del mismo jugador.</p>
+      <p>7. El balón golpea techo, pared o antena.</p>
+      <div class="notice"><strong>Recuerda:</strong> no importa quién realizó el saque; cada rally terminado produce un punto.</div>
     </div>
   </div>
 </section>
@@ -295,11 +300,11 @@ Joan Sebastian Jaimes · Dolly Contreras · Laren Liseth Rodriguez · Natalia Pi
         <button class="btn secondary" id="resetSet">Reiniciar set</button>
         <button class="btn danger" id="resetMatch">Reiniciar partido</button>
       </div>
-      <div id="simMsg" class="tooltip">Primer set a 25 puntos con diferencia mínima de 2.</div>
+      <div id="simMsg" class="tooltip"><strong>Rally Point:</strong> cada jugada suma 1 punto. Primer set a 25 puntos con diferencia mínima de 2.</div>
     </div>
     <div class="card third">
       <h2>🧠 ¿Qué enseña?</h2>
-      <p class="muted">Este simulador permite comprender que un set no termina simplemente al llegar a 25: debe existir diferencia mínima de dos puntos.</p>
+      <p class="muted">Este simulador permite comprender el sistema Rally Point: cada jugada suma 1 punto. Además, un set no termina simplemente al llegar a 25; debe existir una diferencia mínima de dos puntos.</p>
     </div>
   </div>
 </section>
@@ -430,7 +435,7 @@ function point(side){
 }
 document.getElementById('pointA').onclick=()=>point('a');document.getElementById('pointB').onclick=()=>point('b');
 document.getElementById('resetSet').onclick=()=>{sim.a=0;sim.b=0;renderSim()};
-document.getElementById('resetMatch').onclick=()=>{sim={a:0,b:0,sa:0,sb:0,set:1};document.getElementById('simMsg').textContent='Primer set a 25 puntos con diferencia mínima de 2.';renderSim()};
+document.getElementById('resetMatch').onclick=()=>{sim={a:0,b:0,sa:0,sb:0,set:1};document.getElementById('simMsg').innerHTML='<strong>Rally Point:</strong> cada jugada suma 1 punto. Primer set a 25 puntos con diferencia mínima de 2.';renderSim()};
 document.getElementById('simA').addEventListener('input',renderSim);document.getElementById('simB').addEventListener('input',renderSim);
 
 function addTeam(){
@@ -493,6 +498,7 @@ function renderFinals(){
 function updateAll(){renderStandings();renderFinals();const played=state.matches.filter(m=>m.sa!==''&&m.sb!==''&&m.sa!==m.sb).length;document.getElementById('kTeams').textContent=state.teams.length;document.getElementById('kMatches').textContent=state.matches.length;document.getElementById('kPlayed').textContent=played;document.getElementById('kPending').textContent=Math.max(0,state.matches.length-played)}
 
 const quiz=[
+ {q:'En el sistema Rally Point, ¿cuándo se suma un punto?',o:['Solo cuando saca mi equipo','En cada jugada terminada','Solo después de un remate'],a:1,e:'Correcto: cada rally terminado otorga 1 punto, sin importar quién sacó.'},
  {q:'¿Cuántos contactos dispone normalmente un equipo para devolver el balón?',o:['2','3','4'],a:1,e:'Correcto: normalmente son hasta 3 contactos.'},
  {q:'¿Qué condición debe cumplirse para cerrar un set?',o:['Llegar exactamente a 25','Tener al menos 2 puntos de diferencia','Ganar por 1 punto'],a:1,e:'Debe existir diferencia mínima de 2 puntos.'},
  {q:'Una victoria 3–2 otorga al ganador:',o:['1 punto','2 puntos','3 puntos'],a:1,e:'En este sistema de clasificación, el ganador obtiene 2 puntos y el perdedor 1.'},
